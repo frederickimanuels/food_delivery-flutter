@@ -109,6 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               ListView(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: foodMenuList.map((food) {
                   return Container(
@@ -125,33 +126,35 @@ class _MainScreenState extends State<MainScreen> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                food.name,
-                                style: TextStyle(
-                                    fontFamily: 'Cabin',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                food.desc,
-                                style: TextStyle(
-                                    fontFamily: 'Cabin',
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                '\$ ${food.price}',
-                                style: TextStyle(
-                                    fontFamily: 'Cabin',
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  food.name,
+                                  style: TextStyle(
+                                      fontFamily: 'Cabin',
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  food.desc,
+                                  style: TextStyle(
+                                      fontFamily: 'Cabin',
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  '\$ ${food.price}',
+                                  style: TextStyle(
+                                      fontFamily: 'Cabin',
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

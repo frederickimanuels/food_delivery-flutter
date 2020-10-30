@@ -14,7 +14,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  String username;
+  String username = "Guest";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
