@@ -1,7 +1,7 @@
 class FoodMenu {
   String name;
   String desc;
-  int price;
+  num price;
   String imgUrl;
 
   FoodMenu({
