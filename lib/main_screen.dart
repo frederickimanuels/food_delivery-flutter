@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/model/food_menu.dart';
+import 'package:food_delivery/finish_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final String username;
@@ -146,12 +147,75 @@ class _MainScreenState extends State<MainScreen> {
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w400),
                                 ),
-                                Text(
-                                  '\$ ${food.price}',
-                                  style: TextStyle(
-                                      fontFamily: 'Cabin',
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      '\$ ${food.price}',
+                                      style: TextStyle(
+                                          fontFamily: 'Cabin',
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        ButtonTheme(
+                                          minWidth: 5,
+                                          height: 25,
+                                          child: RaisedButton(
+                                            padding: EdgeInsets.only(
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 10,
+                                                right: 10),
+                                            color: Color(0xffF4B33C),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                if (food.count > 0) {
+                                                  food.count--;
+                                                } else {
+                                                  food.count = 0;
+                                                }
+                                              });
+                                            },
+                                            child: Text(
+                                              '-',
+                                            ),
+                                          ),
+                                        ),
+                                        Text('${food.count}'),
+                                        ButtonTheme(
+                                          minWidth: 5,
+                                          height: 25,
+                                          child: RaisedButton(
+                                            padding: EdgeInsets.only(
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 10,
+                                                right: 10),
+                                            color: Color(0xffF4B33C),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                food.count++;
+                                              });
+                                            },
+                                            child: Text(
+                                              '+',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -168,8 +232,15 @@ class _MainScreenState extends State<MainScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xffF4B33C),
-        tooltip: 'Increment',
-        child: Icon(Icons.shopping_cart),
+        tooltip: 'Order Now',
+        child: Icon(Icons.fastfood),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return FinishScreen(username: username);
+            },
+          ));
+        },
       ),
     );
   }
@@ -185,12 +256,14 @@ var foodMenuList = [
     name: 'Satay',
     desc: 'Chicken satay',
     price: 2.5,
+    count: 0,
     imgUrl: 'https://kbu-cdn.com/dk/wp-content/uploads/sate-ayam.jpg',
   ),
   FoodMenu(
     name: 'Batagor',
     desc: 'Fried dumplings with peanut sauce',
     price: 3,
+    count: 0,
     imgUrl:
         'https://dikemas.com/uploads/2019/05/resep-batagor-enak-yang-bisa-kamu-jadikan-ladang-bisnis.jpg',
   ),
@@ -198,13 +271,15 @@ var foodMenuList = [
     name: 'Honey Roasted Gurami',
     desc: 'Roasted gurami fish coated with honey',
     price: 6,
+    count: 0,
     imgUrl:
         'https://1.bp.blogspot.com/-KzhGQHd89SA/UvbhNkQR_zI/AAAAAAAAAXE/NNeaVS_zNXE/s1600/ikan-gurame-bakar.jpg',
   ),
   FoodMenu(
     name: 'Mixed Tofu',
-    desc: 'Tofu noodles with vegetables and other ingredients',
+    desc: 'Tofu, noodles, and vegetables with soup',
     price: 3.5,
+    count: 0,
     imgUrl:
         'https://awsimages.detik.net.id/community/media/visual/2019/09/10/9e9e566c-25f7-4478-af19-89f1ace56e73_169.jpeg?w=700&q=90',
   ),
@@ -212,6 +287,7 @@ var foodMenuList = [
     name: 'Gado - Gado',
     desc: 'Mixed vegetables with peanut sauce',
     price: 2.5,
+    count: 0,
     imgUrl:
         'https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/02/Resep-Gado-Gado.jpg?fit=2461%2C2359&ssl=1',
   ),
@@ -219,6 +295,7 @@ var foodMenuList = [
     name: 'Bakso',
     desc: 'Meatballs',
     price: 4,
+    count: 0,
     imgUrl:
         'https://cdn.idntimes.com/content-images/community/2019/06/duren-sawit-kuliner-6-bakso-dan-mie-ayam-favorioriginal-c44a0544fb0c5cc279fb6df2aaa66566_600x400.jpg',
   ),
